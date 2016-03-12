@@ -12,6 +12,7 @@
 		AC290F8B1C943AFF003956E5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC290F891C943AFF003956E5 /* Main.storyboard */; };
 		AC290F8D1C943AFF003956E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC290F8C1C943AFF003956E5 /* Assets.xcassets */; };
 		AC290F901C943AFF003956E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC290F8E1C943AFF003956E5 /* LaunchScreen.storyboard */; };
+		ACA047031C943DC700F68DB4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACA047021C943DC700F68DB4 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		AC290F8C1C943AFF003956E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AC290F8F1C943AFF003956E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AC290F911C943AFF003956E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ACA047021C943DC700F68DB4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACA047031C943DC700F68DB4 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +41,7 @@
 		AC290F791C943AFF003956E5 = {
 			isa = PBXGroup;
 			children = (
+				ACA047021C943DC700F68DB4 /* MapKit.framework */,
 				AC290F841C943AFF003956E5 /* TTNGuiaTurismo */,
 				AC290F831C943AFF003956E5 /* Products */,
 			);
@@ -96,6 +100,11 @@
 				TargetAttributes = {
 					AC290F811C943AFF003956E5 = {
 						CreatedOnToolsVersion = 7.2;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -286,6 +295,7 @@
 				AC290F961C943AFF003956E5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
