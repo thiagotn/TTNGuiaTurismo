@@ -67,7 +67,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
             if let places = json["locais"] as? [[String: AnyObject]] {
 
             for place in places {
-                print(place["nome"]!)
+                //print(place["nome"]!)
                 
                 let nome: String? = place["nome"] as? String
                 let endereco: String? = place["endereco"] as? String
@@ -76,9 +76,10 @@ class ViewController: UIViewController, MKMapViewDelegate {
                 var coordenada = place["coordenadas"] as? [String: AnyObject]
                 let lat: Double! = coordenada!["lat"] as? Double
                 let long: Double! = coordenada!["lon"] as? Double
-                print("Lat \(lat) - Long \(long)")
+                //print("Lat \(lat) - Long \(long)")
 
                 let pontoTuristicoAnnotation: PontoTuristicoAnnotation = PontoTuristicoAnnotation(coordinate: CLLocationCoordinate2DMake(lat, long), title: nome!, subtitle: endereco!, image: imagem!)
+                
                 
                 self.mapView.addAnnotation(pontoTuristicoAnnotation)
                 
@@ -86,6 +87,58 @@ class ViewController: UIViewController, MKMapViewDelegate {
             }
         } catch {
             print("Erro no parser JSON")
+        }
+    }
+
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        if (annotation is PontoTuristicoAnnotation) {
+            //verificar se a marcação já existe para tentar reutilizá-la
+            let reuseId = "reusePontoTuristicoAnnotation"
+            var anView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
+            //se a view não existir
+            if (anView == nil) {
+                //criar a view como subclasse de MKAnnotationView
+                anView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+                //trocar a imagem pelo logo do metro
+                anView!.image = UIImage(named:"bluePin")
+                //permitir que mostre o "balão" com informações da marcação
+                anView!.canShowCallout = true
+                //adiciona um botão do lado direito do balão
+                anView!.rightCalloutAccessoryView = UIButton(type: UIButtonType.DetailDisclosure)
+            }
+        return anView
+        }
+        return nil
+    }
+
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if (view.annotation is PontoTuristicoAnnotation) {
+            print("mandar para o detalhe!")
+
+            let pontoTuristicoAnnotation: PontoTuristicoAnnotation = view.annotation! as! PontoTuristicoAnnotation
+        
+            performSegueWithIdentifier("segueDetalhe", sender: pontoTuristicoAnnotation)
+        }
+    }
+
+    // MARK: - Navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "segueDetalhe") {
+            if let detalheViewController = segue.destinationViewController as? DetalheController {
+        
+                let pontoTuristicoAnnotation: PontoTuristicoAnnotation = sender! as! PontoTuristicoAnnotation
+        
+                /*
+                detalheViewController.titulo = "Bairro da Liberdade"
+                detalheViewController.subtitulo = "Praça da Liberdade, São Paulo, SP, Brazil"
+                detalheViewController.imagem = "http://flameworks.com.br/fiap/bairroliberdade.png"
+                */
+
+                detalheViewController.titulo = pontoTuristicoAnnotation.title!
+                detalheViewController.subtitulo = pontoTuristicoAnnotation.subtitle!
+                detalheViewController.imagem = pontoTuristicoAnnotation.image!
+    
+            }
         }
     }
 }

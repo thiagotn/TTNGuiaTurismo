@@ -15,21 +15,11 @@ class PontoTuristicoAnnotation: NSObject, MKAnnotation {
     var title: String?
     var subtitle: String?
     var image: String?
-/*    var mapItem: MKMapItem?
-    
-    init(coordinate: CLLocationCoordinate2D, title: String, subtitle: String, image: String, mapItem: MKMapItem) {
-        self.coordinate = coordinate
-        self.title = title
-        self.subtitle = subtitle
-        self.image = image
-        self.mapItem = mapItem
-    }
-*/
+
     init(coordinate: CLLocationCoordinate2D, title: String, subtitle: String, image: String) {
         self.coordinate = coordinate
         self.title = title
         self.subtitle = subtitle
         self.image = image
     }
-
 }
