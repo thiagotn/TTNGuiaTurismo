@@ -27,6 +27,7 @@ class DetalheController: UIViewController {
         labelName.text = titulo
         labelSubtitulo.text = subtitulo
         
+        // tks! -> https://ioswift.wordpress.com/2014/06/08/uiactivityindicatorview-in-swift/
         let actInd : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 50, 50)) as UIActivityIndicatorView
             actInd.center = self.view.center
             actInd.hidesWhenStopped = true
