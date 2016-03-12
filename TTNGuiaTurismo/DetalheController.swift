@@ -27,9 +27,17 @@ class DetalheController: UIViewController {
         labelName.text = titulo
         labelSubtitulo.text = subtitulo
         
+        let actInd : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 50, 50)) as UIActivityIndicatorView
+            actInd.center = self.view.center
+            actInd.hidesWhenStopped = true
+            actInd.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+            view.addSubview(actInd)
+            actInd.startAnimating()
+        
         dispatch_async(dispatch_get_main_queue(), {
             //self.carregaPontosTuristicosNoMapa(data!)
             self.carregaImagem(self.imagem)
+            actInd.stopAnimating()
         })
     }
  
