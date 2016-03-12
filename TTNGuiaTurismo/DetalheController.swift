@@ -27,11 +27,10 @@ class DetalheController: UIViewController {
         labelName.text = titulo
         labelSubtitulo.text = subtitulo
         
-        let url = NSURL(string:imagem)
-        data = NSData(contentsOfURL:url!)
-        if data != nil {
-            img?.image = UIImage(data:data!)
-        }                
+        dispatch_async(dispatch_get_main_queue(), {
+            //self.carregaPontosTuristicosNoMapa(data!)
+            self.carregaImagem(self.imagem)
+        })
     }
  
     override func didReceiveMemoryWarning() {
@@ -39,4 +38,11 @@ class DetalheController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    func carregaImagem(imagem: String) {
+        let url = NSURL(string:imagem)
+        data = NSData(contentsOfURL:url!)
+        if data != nil {
+            img?.image = UIImage(data:data!)
+        }
+    }
 }
